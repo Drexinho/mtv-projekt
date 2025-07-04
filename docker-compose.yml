@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  backend:
+    build: ./filmove-databaze
+    container_name: filmhub-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - filmhub-db:/app/filmy.db
+    restart: unless-stopped
+  frontend:
+    build: ./filmove-databaze-ui
+    container_name: filmhub-frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+volumes:
+  filmhub-db: 
